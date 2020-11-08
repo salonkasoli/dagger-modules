@@ -1,0 +1,6 @@
+include ':some_other_module_api'
+include ':some_other_module'
+include ':text_module'
+include ':di_core'
+include ':app'
+rootProject.name = "DaggerSandbox"
