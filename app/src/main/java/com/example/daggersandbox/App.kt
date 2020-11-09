@@ -2,7 +2,6 @@ package com.example.daggersandbox
 
 import android.app.Application
 import com.example.daggersandbox.deps.other.OtherComponentFactory
-import com.example.daggersandbox.deps.other.OtherDepsComponent
 import com.example.daggersandbox.deps.text.TextComponentFactory
 import com.example.daggersandbox.deps.text.TextDepsComponent
 import com.example.di.Injector
