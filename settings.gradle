@@ -1,3 +1,6 @@
+include ':inner_module_stub'
+include ':inner_module_api'
+include ':inner_module'
 include ':some_other_module_api'
 include ':some_other_module'
 include ':text_module'

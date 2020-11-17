@@ -13,6 +13,9 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/di_core" />
+            <option value="$PROJECT_DIR$/inner_module" />
+            <option value="$PROJECT_DIR$/inner_module_api" />
+            <option value="$PROJECT_DIR$/inner_module_stub" />
             <option value="$PROJECT_DIR$/some_other_module" />
             <option value="$PROJECT_DIR$/some_other_module_api" />
             <option value="$PROJECT_DIR$/text_module" />
