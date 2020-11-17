@@ -3,41 +3,41 @@ package com.example.di
 /**
  * Синглтон Dependency container.
  */
-// TODO sync this
+// TODO sync this and typesafety
 object Injector {
 
     /**
      * Уже созданные компоненты
      */
-    private val components = HashMap<Class<out Component>, Component>()
+    private val components = HashMap<Any, Component>()
 
     /**
      * Фабрики, с помощью которых создаются компоненты
      */
-    private val factories = HashMap<Class<out Component>, ComponentFactory<out Component>>()
+    private val factories = HashMap<Any, ComponentFactory<out Component>>()
 
     /**
      * Добавить фабрику компонента. Компонент будет создан в момент, когда он понадобится
      * в первый раз и затем закэширован.
      */
-    fun <T : Component> put(clazz: Class<T>, factory: ComponentFactory<T>) {
-        factories[clazz] = factory
+    fun put(key: Any, factory: ComponentFactory<out Component>) {
+        factories[key] = factory
     }
 
     /**
      * Получить компонент (или создать новый, если еще не был создан).
      */
-    fun <T : Component> get(clazz: Class<T>): T {
-        val component = components[clazz]
+    fun <T> get(key: Any): T {
+        val component = components[key]
         if (component != null) {
             return component as T
         }
 
-        val factory = factories[clazz] as? ComponentFactory<T>
-            ?: throw IllegalArgumentException("There is no factory for component class $clazz")
+        val factory = factories[key]
+            ?: throw IllegalArgumentException("There is no factory for key = $key")
 
         val newComponent = factory.create()
-        components[clazz] = newComponent
-        return newComponent
+        components[key] = newComponent
+        return newComponent as T
     }
 }

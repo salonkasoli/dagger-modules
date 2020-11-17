@@ -9,4 +9,8 @@ import dagger.Component
     modules = [OtherModule::class],
     dependencies = [OtherDeps::class]
 )
-abstract class OtherComponent : FeatureComponent, OtherApi
+abstract class OtherComponent : FeatureComponent, OtherApi {
+    companion object {
+        val INJECT_KEY = "other_component"
+    }
+}

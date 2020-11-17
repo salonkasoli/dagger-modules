@@ -7,6 +7,6 @@ import com.example.inner.api.InnerRepository
 class InnerStubComponent : FeatureComponent, InnerApi {
 
     override fun getRepo(): InnerRepository {
-        TODO("Not yet implemented")
+        return InnerStubRepository()
     }
 }

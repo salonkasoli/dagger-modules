@@ -38,6 +38,9 @@ dependencies {
     implementation project(":text_module")
     implementation project(':some_other_module')
     implementation project(":some_other_module_api")
+    implementation project(":inner_module")
+    implementation project(":inner_module_stub")
+    implementation project(":inner_module_api")
 
     implementation 'com.google.dagger:dagger:2.29.1'
     kapt 'com.google.dagger:dagger-compiler:2.29.1'

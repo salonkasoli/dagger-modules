@@ -12,7 +12,7 @@ class TextActivity : AppCompatActivity(R.layout.text_activity) {
 
     companion object {
 
-        fun intent(context: Context) : Intent {
+        fun intent(context: Context): Intent {
             return Intent(context, TextActivity::class.java)
         }
     }
@@ -22,7 +22,7 @@ class TextActivity : AppCompatActivity(R.layout.text_activity) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Injector.get(TextComponent::class.java).inject(this)
+        Injector.get<TextComponent>(TextComponent.INJECT_KEY).inject(this)
         findViewById<TextView>(R.id.text).text = text
     }
 }

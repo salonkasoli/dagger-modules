@@ -14,6 +14,10 @@ class OtherComponentFactory : ComponentFactory<OtherComponent> {
                     override fun someString(): String {
                         return "Some String"
                     }
+
+                    override fun isInnerStub(): Boolean {
+                        return false
+                    }
                 }
             )
             .build()

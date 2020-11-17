@@ -2,16 +2,17 @@ package com.example.daggersandbox.deps.text
 
 import com.example.di.ComponentFactory
 import com.example.di.Injector
-import com.example.other.OtherComponent
+import com.example.inner.InnerComponent
+import com.example.inner.api.InnerApi
 import com.example.text.DaggerTextComponent
 import com.example.text.TextComponent
 
 class TextComponentFactory : ComponentFactory<TextComponent> {
 
     override fun create(): TextComponent {
-        val otherComponent = Injector.get(OtherComponent::class.java)
+        val innerApi = Injector.get<InnerApi>(InnerComponent.INJECT_KEY)
         return DaggerTextComponent.builder()
-            .textDeps(TextDepsImpl(otherComponent.otherRepository()))
+            .textDeps(TextDepsImpl(innerApi.getRepo()))
             .build()
     }
 }
