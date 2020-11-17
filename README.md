@@ -39,7 +39,7 @@
 Модуль, инициализирующий DI и собирающий отдельные части приложения воедино.
 В пакете deps лежат классы, необходимые для создания и прокидывания зависимостей.
 Ключевым является понимание того, что все components в Injector создаются в момент их необходимости.
-В данном примере TextComponent требует для своего создания TextDepsComponent, который,
+В данном примере TextComponent требует для своего создания OtherComponent, который,
 в свою очередь, нуждается в OtherComponent:
 
 ```kotlin
@@ -47,25 +47,12 @@
 class TextComponentFactory : ComponentFactory<TextComponent> {
 
     override fun create(): TextComponent {
+        val otherComponent = Injector.get(OtherComponent::class.java)
         return DaggerTextComponent.builder()
-            // Требуется TextDepsComponent
-            .textDeps(Injector.get(TextDepsComponent::class.java).getDeps())
+            .textDeps(TextDepsImpl(otherComponent.otherRepository()))
             .build()
     }
 }
-```
-
-```kotlin
-// фабрика TextDepsComponent
-class Factory : ComponentFactory<TextDepsComponent> {
-
-        override fun create(): TextDepsComponent {
-            return DaggerTextDepsComponent.builder()
-                // Требуется OtherComponent
-                .otherRepository(Injector.get(OtherComponent::class.java).repo())
-                .build()
-        }
-    }
 ```
 
 Пока вы находитесьна MainActivity не создан ни один из этих компонентов.
@@ -74,9 +61,11 @@ class Factory : ComponentFactory<TextDepsComponent> {
     Injector.get(TextComponent::class.java)
 ```
 Injector сначала пытается создать TextComponent. В процессе создания мы запрашиваем
-TextDepsComponent, что в свою очередь приведет к созданию OtherComponent и, возвращаясь по цепочке
-вызовов будет, наконец, создан TextComponent.
+OtherComponent, что приведет к его созданию и, возвращаясь по цепочке вызовов будет, наконец,
+создан TextComponent.
 
-Как можно заметить, совершенно необязательно создавать DepsComponent
-(что продемонстрированно в OtherComponentFactory). DepsComponent были придуманы как инструмент
-для dagger-генерации зависимостей.
+TODO
+
+1) Необходим механизм очищения компонент
+2) Инжектор должен состоять из "слоев". Компонента может быть родительской, дочерней или одновременно и той и той.
+Необходим механизм регистрации детей из родителей.

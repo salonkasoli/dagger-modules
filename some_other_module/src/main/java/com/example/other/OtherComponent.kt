@@ -1,7 +1,7 @@
 package com.example.other
 
 import com.example.di.FeatureComponent
-import com.example.some_other_module_api.OtherRepository
+import com.example.some_other_module_api.OtherApi
 import dagger.Component
 
 @OtherScope
@@ -9,7 +9,4 @@ import dagger.Component
     modules = [OtherModule::class],
     dependencies = [OtherDeps::class]
 )
-abstract class OtherComponent : FeatureComponent {
-
-    abstract fun repo(): OtherRepository
-}
+abstract class OtherComponent : FeatureComponent, OtherApi
